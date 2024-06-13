@@ -15,6 +15,7 @@ public class InputReader : MonoBehaviour
         var moveAction = inputActions.FindAction(moveActionName);
         if (moveAction != null)
         {
+
             moveAction.performed += HandleMoveInput;
             moveAction.canceled += HandleMoveInput;
         }

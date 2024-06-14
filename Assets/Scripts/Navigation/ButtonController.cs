@@ -14,24 +14,6 @@ public class ButtonController : MonoBehaviour
 
     public event Action<string> OnClick;
 
-    private void Reset()
-    {
-        GameObject child;
-        if (transform.childCount < 1)
-        {
-            child = new GameObject("Text (TMP)");
-            child.transform.SetParent(transform);
-        }
-        else
-            //child = transform.GetChild(0).gameObject();
-
-        //if (!child.TryGetComponent<TMP_Text>(out text))
-        //{
-        //    text = child.AddComponent<TextMeshProUGUI>();
-        //}
-        _button = GetComponent<Button>();
-    }
-
     private void Awake()
     {
         text ??= GetComponent<TMP_Text>();

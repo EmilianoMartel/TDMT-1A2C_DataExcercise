@@ -7,7 +7,7 @@ using UnityEngine;
 public class NavigationManager : MonoBehaviour
 {
     [Tooltip("First menu in the list is the default one :)")]
-    [SerializeField] private List<MenuWithId> menusWithId;
+    [SerializeField] private List<MenuDataSource> menusWithId;
 
     //[SerializeField] private DataSource<GameManager> gameManagerDataSource;
     private int _currentMenuIndex = 0;
@@ -16,14 +16,14 @@ public class NavigationManager : MonoBehaviour
     {
         foreach (var menu in menusWithId)
         {
-            menu.Menu.Setup();
-            menu.Menu.OnChangeMenu += HandleChangeMenu;
-            menu.Menu.gameObject.SetActive(false);
+            menu.DataInstance.Setup();
+            menu.DataInstance.OnChangeMenu += HandleChangeMenu;
+            menu.DataInstance.gameObject.SetActive(false);
         }
 
         if (menusWithId.Count > 0)
         {
-            menusWithId[_currentMenuIndex].Menu.gameObject.SetActive(true);
+            menusWithId[_currentMenuIndex].DataInstance.gameObject.SetActive(true);
         }
     }
 
@@ -36,20 +36,13 @@ public class NavigationManager : MonoBehaviour
         for (var i = 0; i < menusWithId.Count; i++)
         {
             var menuWithId = menusWithId[i];
-            if (menuWithId.ID == id)
+            if (menuWithId.menuId == id)
             {
-                menusWithId[_currentMenuIndex].Menu.gameObject.SetActive(false);
-                menuWithId.Menu.gameObject.SetActive(true);
+                menusWithId[_currentMenuIndex].DataInstance.gameObject.SetActive(false);
+                menuWithId.DataInstance.gameObject.SetActive(true);
                 _currentMenuIndex = i;
                 break;
             }
         }
-    }
-
-    [Serializable]
-    public struct MenuWithId
-    {
-        [field: SerializeField] public string ID { get; set; }
-        [field: SerializeField] public Menu Menu { get; set; }
     }
 }

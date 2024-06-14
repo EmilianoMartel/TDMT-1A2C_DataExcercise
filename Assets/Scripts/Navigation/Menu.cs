@@ -5,24 +5,53 @@ using UnityEngine;
 
 public class Menu : MonoBehaviour
 {
-    //[SerializeField] private ButtonController buttonPrefab;
-    [SerializeField] private List<string> ids = new();
-    [SerializeField] private Transform buttonsParent;
+    [SerializeField] private MenuDataSource _selfDataSource;
+    [SerializeField] private ButtonController _buttonPrefab;
+    [SerializeField] private List<MenuDataSource> _ids = new();
+    [SerializeField] private Transform _buttonsParent;
 
     public event Action<string> OnChangeMenu;
 
+    private void Awake()
+    {
+        _selfDataSource.DataInstance = this;
+        ValidateParameters();
+    }
+
     public void Setup()
     {
-        foreach (var id in ids)
+        foreach (var id in _ids)
         {
-            //var newButton = Instantiate(buttonPrefab, buttonsParent);
-            //newButton.name = $"{id}_Btn";
-            //newButton.Setup(id, id, HandleButtonClick);
+            var newButton = Instantiate(_buttonPrefab, _buttonsParent);
+            newButton.name = $"{id.menuId}_Btn";
+            newButton.Setup(id.menuId, id.menuId, HandleButtonClick);
         }
     }
 
     private void HandleButtonClick(string id)
     {
         OnChangeMenu?.Invoke(id);
+    }
+
+    private void ValidateParameters()
+    {
+        if (!_buttonPrefab)
+        {
+            Debug.LogError($"{name}: Button Controller Prefab is null.\nCheck and assigned one.\nDisabling component.");
+            enabled = false;
+            return;
+        }
+        if (!_buttonsParent)
+        {
+            Debug.LogError($"{name}: Button Parent is null.\nCheck and assigned one.\nDisabling component.");
+            enabled = false;
+            return;
+        }
+        if (_ids.Count < 0)
+        {
+            Debug.LogError($"{name}: Ids list count cant´t be less 0.\nCheck and assigned one.\nDisabling component.");
+            enabled = false;
+            return;
+        }
     }
 }

@@ -59,9 +59,8 @@ public class SceneryManager : MonoBehaviour
     private IEnumerator ChangeLevel(List<SceneLevel> currentLevel, List<SceneLevel> newLevel)
     {
         onLoading?.Invoke();
-        onLoadPercentage?.Invoke(0);
         var unloadCount = 0;
-        
+        onLoadPercentage?.Invoke(0);
         for (int i = 0; i < currentLevel.Count; i++)
         {
             if (currentLevel[i].IsUnloadable)

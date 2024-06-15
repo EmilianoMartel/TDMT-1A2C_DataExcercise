@@ -50,7 +50,7 @@ public class SceneryManagerUI : MonoBehaviour
 
     private void TurnOffLoadingScreen()
     {
-        loadingBarFill.fillAmount = 0;
+        loadingBarFill.fillAmount = 0f;
         loadingScreen.enabled = false;
     }
 

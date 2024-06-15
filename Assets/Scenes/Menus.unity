@@ -241,9 +241,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Made by: <Student name>
+  m_text: 'Made by: Emiliano Martel
 
-    Subject: '
+    Subject: Programing with Graphic Engines
+    1 Unity'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -421,7 +422,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &276492856
 MonoBehaviour:
@@ -541,7 +542,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &388480092
 MonoBehaviour:
@@ -1422,7 +1423,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &1462274429
 MonoBehaviour:
@@ -1492,6 +1493,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 605969b158764b846b3f34a674a2bde5, type: 2}
   - {fileID: 11400000, guid: 32589c49fbf9b1c40b1ef395d8565ff9, type: 2}
   - {fileID: 11400000, guid: 2ab0866b003b56243b61f63b041cd62a, type: 2}
+  gameManagerDataSource: {fileID: 11400000, guid: 542ef0dc7c32c0f48a15a4e00746bcad, type: 2}
 --- !u!1 &2018697421
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 public class SceneryManager : MonoBehaviour
 {
     [SerializeField] private DataSource<SceneryManager> _sceneryManagerDataSource;
-    [SerializeField] private List<LevelContainer> _defaultLevel;
-    private List<Level> _currentLevel;
+    [SerializeField] private List<ScenaryContainer> _defaultLevel;
+    private List<SceneLevel> _currentLevel;
 
     public event Action onLoading = delegate { };
     /// <summary>
@@ -38,12 +38,25 @@ public class SceneryManager : MonoBehaviour
         }
     }
 
-    public void ChangeLevel(List<Level> level)
+    public void ChangeLevel(List<SceneLevel> level)
     {
         StartCoroutine(ChangeLevel(_currentLevel, level));
     }
 
-    private IEnumerator ChangeLevel(List<Level> currentLevel, List<Level> newLevel)
+    public void ChangeLevel(List<ScenaryContainer> level)
+    {
+        List<SceneLevel> levels = LevelContainerConverter(level);
+        StartCoroutine(ChangeLevel(_currentLevel, levels));
+    }
+
+    public void ChangeLevel(SceneLevel level)
+    {
+        List<SceneLevel> levels = new();
+        levels.Add(level);
+        StartCoroutine(ChangeLevel(_currentLevel, levels));
+    }
+
+    private IEnumerator ChangeLevel(List<SceneLevel> currentLevel, List<SceneLevel> newLevel)
     {
         onLoading?.Invoke();
         onLoadPercentage?.Invoke(0);
@@ -69,7 +82,7 @@ public class SceneryManager : MonoBehaviour
         onLoaded?.Invoke();
     }
 
-    private IEnumerator LoadFirstLevel(List<Level> level)
+    private IEnumerator LoadFirstLevel(List<SceneLevel> level)
     {
         //This is a cheating value, do not use in production!
         var addedWeight = 5;
@@ -90,7 +103,7 @@ public class SceneryManager : MonoBehaviour
         onLoaded?.Invoke();
     }
 
-    private IEnumerator Load(List<Level> level, Action<int> onLoadedSceneQtyChanged)
+    private IEnumerator Load(List<SceneLevel> level, Action<int> onLoadedSceneQtyChanged)
     {
         var current = 0;
         foreach (var sceneName in level)
@@ -102,7 +115,7 @@ public class SceneryManager : MonoBehaviour
         }
     }
 
-    private IEnumerator Unload(List<Level> level, Action<int> onUnloadedSceneQtyChanged)
+    private IEnumerator Unload(List<SceneLevel> level, Action<int> onUnloadedSceneQtyChanged)
     {
         var current = 0;
         foreach (var sceneName in level)
@@ -117,12 +130,12 @@ public class SceneryManager : MonoBehaviour
         }
     }
 
-    private List<Level> LevelContainerConverter(List<LevelContainer> container)
+    private List<SceneLevel> LevelContainerConverter(List<ScenaryContainer> container)
     {
-        List<Level> levels = new();
+        List<SceneLevel> levels = new();
         for (int i = 0; i < container.Count; i++)
         {
-            levels.Add(container[i].level);
+            levels.Add(container[i].scene);
         }
 
         return levels;

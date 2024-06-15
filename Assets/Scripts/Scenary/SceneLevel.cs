@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class Level
+public class SceneLevel
 {
     [field: SerializeField] public string SceneName { get; private set; }
     [field: SerializeField] public bool IsUnloadable { get; private set; }

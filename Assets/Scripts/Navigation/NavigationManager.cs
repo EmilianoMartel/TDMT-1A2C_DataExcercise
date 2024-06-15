@@ -9,7 +9,7 @@ public class NavigationManager : MonoBehaviour
     [Tooltip("First menu in the list is the default one :)")]
     [SerializeField] private List<MenuDataSource> menusWithId;
 
-    //[SerializeField] private DataSource<GameManager> gameManagerDataSource;
+    [SerializeField] private DataSource<GameManager> gameManagerDataSource;
     private int _currentMenuIndex = 0;
 
     private void Start()
@@ -29,10 +29,10 @@ public class NavigationManager : MonoBehaviour
 
     private void HandleChangeMenu(string id)
     {
-        //if (idsToTellGameManager.Contains(id) && gameManagerDataSource != null && gameManagerDataSource.Value != null)
-        //{
-        //    gameManagerDataSource.Value.HandleSpecialEvents(id);
-        //}
+        if (gameManagerDataSource != null && gameManagerDataSource.DataInstance != null && gameManagerDataSource.DataInstance.HandleSpecialEvents(id))
+        {
+            return;
+        }
         for (var i = 0; i < menusWithId.Count; i++)
         {
             var menuWithId = menusWithId[i];

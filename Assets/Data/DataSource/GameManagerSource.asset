@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d4234498e7d38449aecf4c778df4f5a, type: 3}
-  m_Name: DataSource_SceneryManagerSource
+  m_Script: {fileID: 11500000, guid: b0b58b26ae6b4474ebb22d2d05f10e54, type: 3}
+  m_Name: GameManagerSource
   m_EditorClassIdentifier: 

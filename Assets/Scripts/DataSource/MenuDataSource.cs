@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DataSource/MenuSource", menuName = "MenuSource")]
+[CreateAssetMenu(fileName = "MenuSource", menuName = "DataSource/MenuSource")]
 public class MenuDataSource : DataSource<Menu>
 {
     [SerializeField] private string _menuId;

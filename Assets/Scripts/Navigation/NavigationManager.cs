@@ -3,45 +3,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using DataSource;
 
-public class NavigationManager : MonoBehaviour
+namespace Navigation
 {
-    [Tooltip("First menu in the list is the default one :)")]
-    [SerializeField] private List<MenuDataSource> menusWithId;
-
-    [SerializeField] private DataSource<GameManager> gameManagerDataSource;
-    private int _currentMenuIndex = 0;
-
-    private void Start()
+    public class NavigationManager : MonoBehaviour
     {
-        foreach (var menu in menusWithId)
-        {
-            menu.DataInstance.Setup();
-            menu.DataInstance.OnChangeMenu += HandleChangeMenu;
-            menu.DataInstance.gameObject.SetActive(false);
-        }
+        [Tooltip("First menu in the list is the default one :)")]
+        [SerializeField] private List<MenuDataSource> menusWithId;
 
-        if (menusWithId.Count > 0)
-        {
-            menusWithId[_currentMenuIndex].DataInstance.gameObject.SetActive(true);
-        }
-    }
+        [SerializeField] private DataSource<GameManager> gameManagerDataSource;
+        private int _currentMenuIndex = 0;
 
-    private void HandleChangeMenu(string id)
-    {
-        if (gameManagerDataSource != null && gameManagerDataSource.DataInstance != null && gameManagerDataSource.DataInstance.HandleSpecialEvents(id))
+        private void Start()
         {
-            return;
-        }
-        for (var i = 0; i < menusWithId.Count; i++)
-        {
-            var menuWithId = menusWithId[i];
-            if (menuWithId.menuId == id)
+            foreach (var menu in menusWithId)
             {
-                menusWithId[_currentMenuIndex].DataInstance.gameObject.SetActive(false);
-                menuWithId.DataInstance.gameObject.SetActive(true);
-                _currentMenuIndex = i;
-                break;
+                menu.DataInstance.Setup();
+                menu.DataInstance.OnChangeMenu += HandleChangeMenu;
+                menu.DataInstance.gameObject.SetActive(false);
+            }
+
+            if (menusWithId.Count > 0)
+            {
+                menusWithId[_currentMenuIndex].DataInstance.gameObject.SetActive(true);
+            }
+        }
+
+        private void HandleChangeMenu(string id)
+        {
+            if (gameManagerDataSource != null && gameManagerDataSource.DataInstance != null && gameManagerDataSource.DataInstance.HandleSpecialEvents(id))
+            {
+                return;
+            }
+            for (var i = 0; i < menusWithId.Count; i++)
+            {
+                var menuWithId = menusWithId[i];
+                if (menuWithId.menuId == id)
+                {
+                    menusWithId[_currentMenuIndex].DataInstance.gameObject.SetActive(false);
+                    menuWithId.DataInstance.gameObject.SetActive(true);
+                    _currentMenuIndex = i;
+                    break;
+                }
             }
         }
     }

@@ -1,0 +1,16 @@
+{
+    "name": "Varela.DataExcercise.Scenary.Rimtime",
+    "rootNamespace": "",
+    "references": [
+        "GUID:96d98ae647b596b4ea454f772fdf4f20"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

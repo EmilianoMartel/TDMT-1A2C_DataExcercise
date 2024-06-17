@@ -1,44 +1,45 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Button))]
-public class ButtonController : MonoBehaviour
+namespace Navigation
 {
-    [SerializeField] private TMP_Text text;
-    private string _id;
-    private Button _button;
-
-    public event Action<string> OnClick;
-
-    private void Awake()
+    [RequireComponent(typeof(Button))]
+    public class ButtonController : MonoBehaviour
     {
-        text ??= GetComponent<TMP_Text>();
-        _button ??= GetComponent<Button>();
-    }
+        [SerializeField] private TMP_Text text;
+        private string _id;
+        private Button _button;
 
-    private void OnEnable()
-    {
-        _button.onClick.AddListener(HandleButtonClick);
-    }
+        public event Action<string> OnClick;
 
-    private void OnDisable()
-    {
-        _button.onClick.RemoveListener(HandleButtonClick);
-    }
+        private void Awake()
+        {
+            text ??= GetComponent<TMP_Text>();
+            _button ??= GetComponent<Button>();
+        }
 
-    public void Setup(string label, string id, Action<string> onClick)
-    {
-        text.SetText(label);
-        _id = id;
-        OnClick = onClick;
-    }
+        private void OnEnable()
+        {
+            _button.onClick.AddListener(HandleButtonClick);
+        }
 
-    private void HandleButtonClick()
-    {
-        OnClick?.Invoke(_id);
+        private void OnDisable()
+        {
+            _button.onClick.RemoveListener(HandleButtonClick);
+        }
+
+        public void Setup(string label, string id, Action<string> onClick)
+        {
+            text.SetText(label);
+            _id = id;
+            OnClick = onClick;
+        }
+
+        private void HandleButtonClick()
+        {
+            OnClick?.Invoke(_id);
+        }
     }
 }

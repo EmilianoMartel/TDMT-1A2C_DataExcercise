@@ -1,108 +1,111 @@
 using System;
 using UnityEngine;
 
-[Serializable]
-public struct ActionConfig
+namespace EventChannel
 {
-    [field: SerializeField] public bool listenerEvent { get; set; }
-    [field: SerializeField] public bool eventLog { get; set; }
-}
-
-public abstract class EventChannels<T> : ScriptableObject
-{
-    [SerializeField] private ActionConfig _config;
-    private Action<T> _event = delegate { };
-
-    public void Sucription(Action<T> action)
+    [Serializable]
+    public struct ActionConfig
     {
-        _event += action;
-        if (_config.listenerEvent)
+        [field: SerializeField] public bool listenerEvent { get; set; }
+        [field: SerializeField] public bool eventLog { get; set; }
+    }
+
+    public abstract class EventChannels<T> : ScriptableObject
+    {
+        [SerializeField] private ActionConfig _config;
+        private Action<T> _event = delegate { };
+
+        public void Sucription(Action<T> action)
         {
-            Debug.Log($"{name}: A listener({action}) was suscribed at Event.");
+            _event += action;
+            if (_config.listenerEvent)
+            {
+                Debug.Log($"{name}: A listener({action}) was suscribed at Event.");
+            }
+        }
+
+        public void Unsuscribe(Action<T> action)
+        {
+            _event -= action;
+            if (_config.listenerEvent)
+            {
+                Debug.Log($"{name}: A listener({action}) was unsuscribed at Event.");
+            }
+        }
+
+        public void InvokeEvent(T data)
+        {
+            _event?.Invoke(data);
+            if (_config.eventLog)
+            {
+                Debug.Log($"{name}: The event was invoked.");
+            }
         }
     }
 
-    public void Unsuscribe(Action<T> action)
+    public abstract class EventChannels<T1, T2> : ScriptableObject
     {
-        _event -= action;
-        if (_config.listenerEvent)
+        [SerializeField] private ActionConfig _config;
+        private Action<T1, T2> _event = delegate { };
+
+        public void Sucription(Action<T1, T2> action)
         {
-            Debug.Log($"{name}: A listener({action}) was unsuscribed at Event.");
+            _event += action;
+            if (_config.listenerEvent)
+            {
+                Debug.Log($"{name}: A listener({action}) was suscribed at Event.");
+            }
+        }
+
+        public void Unsuscribe(Action<T1, T2> action)
+        {
+            _event -= action;
+            if (_config.listenerEvent)
+            {
+                Debug.Log($"{name}: A listener({action}) was unsuscribed at Event.");
+            }
+        }
+
+        public void InvokeEvent(T1 data, T2 data2)
+        {
+            _event?.Invoke(data, data2);
+            if (_config.eventLog)
+            {
+                Debug.Log($"{name}: The event was invoked.");
+            }
         }
     }
 
-    public void InvokeEvent(T data)
+    public abstract class EventChannels<T1, T2, T3> : ScriptableObject
     {
-        _event?.Invoke(data);
-        if (_config.eventLog)
+        [SerializeField] private ActionConfig _config;
+        private Action<T1, T2, T3> _event = delegate { };
+
+        public void Sucription(Action<T1, T2, T3> action)
         {
-            Debug.Log($"{name}: The event was invoked.");
+            _event += action;
+            if (_config.listenerEvent)
+            {
+                Debug.Log($"{name}: A listener({action}) was suscribed at Event.");
+            }
         }
-    }
-}
 
-public abstract class EventChannels<T1, T2> : ScriptableObject
-{
-    [SerializeField] private ActionConfig _config;
-    private Action<T1, T2> _event = delegate { };
-
-    public void Sucription(Action<T1, T2> action)
-    {
-        _event += action;
-        if (_config.listenerEvent)
+        public void Unsuscribe(Action<T1, T2, T3> action)
         {
-            Debug.Log($"{name}: A listener({action}) was suscribed at Event.");
+            _event -= action;
+            if (_config.listenerEvent)
+            {
+                Debug.Log($"{name}: A listener({action}) was unsuscribed at Event.");
+            }
         }
-    }
 
-    public void Unsuscribe(Action<T1, T2> action)
-    {
-        _event -= action;
-        if (_config.listenerEvent)
+        public void InvokeEvent(T1 data1, T2 data2, T3 data3)
         {
-            Debug.Log($"{name}: A listener({action}) was unsuscribed at Event.");
-        }
-    }
-
-    public void InvokeEvent(T1 data, T2 data2)
-    {
-        _event?.Invoke(data, data2);
-        if (_config.eventLog)
-        {
-            Debug.Log($"{name}: The event was invoked.");
-        }
-    }
-}
-
-public abstract class EventChannels<T1, T2, T3> : ScriptableObject
-{
-    [SerializeField] private ActionConfig _config;
-    private Action<T1, T2, T3> _event = delegate { };
-
-    public void Sucription(Action<T1, T2, T3> action)
-    {
-        _event += action;
-        if (_config.listenerEvent)
-        {
-            Debug.Log($"{name}: A listener({action}) was suscribed at Event.");
-        }
-    }
-
-    public void Unsuscribe(Action<T1, T2, T3> action)
-    {
-        _event -= action;
-        if (_config.listenerEvent)
-        {
-            Debug.Log($"{name}: A listener({action}) was unsuscribed at Event.");
-        }
-    }
-
-    public void InvokeEvent(T1 data1, T2 data2, T3 data3)
-    {
-        _event?.Invoke(data1, data2, data3);
-        if (_config.eventLog)
-        {
-            Debug.Log($"{name}: The event was invoked.");
+            _event?.Invoke(data1, data2, data3);
+            if (_config.eventLog)
+            {
+                Debug.Log($"{name}: The event was invoked.");
+            }
         }
     }
 }

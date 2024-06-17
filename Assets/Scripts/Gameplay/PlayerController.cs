@@ -6,6 +6,7 @@ namespace Gameplay
     [RequireComponent(typeof(Character))]
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] private Vector2Channel _directionEvent;
         private Character _character;
 
         private void Reset()
@@ -26,12 +27,16 @@ namespace Gameplay
         {
             //TODO: Subscribe to inputs via event manager/event channel
             //TODO: Set itself as player reference via ReferenceManager/DataSource
+
+            _directionEvent?.Sucription(HandleMove);
         }
 
         private void OnDisable()
         {
             //TODO: Unsubscribe from all inputs via event manager/event channel
             //TODO: Remove itself as player reference via reference manager/dataSource
+
+            _directionEvent?.Unsuscribe(HandleMove);
         }
 
         public void SetPlayerAtLevelStartAndEnable(Vector3 levelStartPosition)

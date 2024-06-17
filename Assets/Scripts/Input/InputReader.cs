@@ -10,6 +10,9 @@ public class InputReader : MonoBehaviour
     [SerializeField] private string moveActionName = "Move";
     [SerializeField] private string runActionName = "Run";
 
+    [SerializeField] private Vector2Channel _moveEvent;
+    [SerializeField] private BoolChannel _runEvent;
+
     private void OnEnable()
     {
         var moveAction = inputActions.FindAction(moveActionName);

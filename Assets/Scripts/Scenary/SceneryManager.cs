@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using DataSource;
+using Core.DataSource;
 
 namespace Scenary
 {

@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Navigation;
+using Core.DataSource;
 
-namespace DataSource
+namespace Navigation
 {
     [CreateAssetMenu(fileName = "MenuSource", menuName = "DataSource/MenuSource")]
     public class MenuDataSource : DataSource<Menu>

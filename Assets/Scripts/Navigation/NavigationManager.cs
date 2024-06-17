@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using DataSource;
+using Core.DataSource;
+using GameManager;
 
 namespace Navigation
 {
@@ -12,7 +13,7 @@ namespace Navigation
         [Tooltip("First menu in the list is the default one :)")]
         [SerializeField] private List<MenuDataSource> menusWithId;
 
-        [SerializeField] private DataSource<GameManager> gameManagerDataSource;
+        [SerializeField] private GameManagerDataSource gameManagerDataSource;
         private int _currentMenuIndex = 0;
 
         private void Start()

@@ -1,4 +1,3 @@
-using System;
 using Core.Interactions;
 using UnityEngine;
 
@@ -7,6 +6,7 @@ namespace AI
     public class EnemyBrain : MonoBehaviour
     {
         [SerializeField] private float attackDistance;
+        [SerializeField] private ITargetDataSource _targetSource;
         private ITarget _target;
         private ISteerable _steerable;
 

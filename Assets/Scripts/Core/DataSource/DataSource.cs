@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DataSource 
+namespace Core.DataSource
 {
     public abstract class DataSource<T> : ScriptableObject
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Scenary;
-using DataSource;
+using Core.DataSource;
 
 namespace GameManager
 {

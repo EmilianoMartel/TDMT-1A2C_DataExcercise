@@ -1,5 +1,7 @@
 using Core.Interactions;
+using System.Collections;
 using UnityEngine;
+using DataSource;
 
 namespace AI
 {
@@ -20,9 +22,14 @@ namespace AI
             }
         }
 
+        private void Start()
+        {
+            StartCoroutine(WaitForTarget());
+        }
+
         private void Update()
         {
-            //TODO: Add logic to get the target from a source/reference system
+            //TODO DONE: Add logic to get the target from a source/reference system
             if (_target == null)
                 return;
             //          AB        =         B        -          A
@@ -39,10 +46,30 @@ namespace AI
             }
         }
 
+        private IEnumerator WaitForTarget()
+        {
+            while (_targetSource.DataInstance == null)
+            {
+                yield return null;
+            }
+
+            _target = _targetSource.DataInstance;
+        }
+
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, attackDistance);
+        }
+    
+        private void ValidateParameters()
+        {
+            if (!_targetSource)
+            {
+                Debug.LogError($"{name}: ITarget source is null.\nCheck and assigned one.\nDisabling component.");
+                enabled = false;
+                return;
+            }
         }
     }
 }

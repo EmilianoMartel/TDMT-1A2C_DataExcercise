@@ -1649,6 +1649,8 @@ MonoBehaviour:
   inputActions: {fileID: -944628639613478452, guid: c85e4913311d23148b946cba3e5176aa, type: 3}
   moveActionName: Move
   runActionName: Run
+  _moveEvent: {fileID: 11400000, guid: b6192fcef76757b47b4d596ea534d8a5, type: 2}
+  _runEvent: {fileID: 11400000, guid: da6c85ab2c8b6094abd1eb4ae63e8ee8, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

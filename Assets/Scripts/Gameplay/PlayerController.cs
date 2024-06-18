@@ -1,5 +1,6 @@
 using Characters;
 using UnityEngine;
+using DataSource;
 
 namespace Gameplay
 {
@@ -7,6 +8,9 @@ namespace Gameplay
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private Vector2Channel _directionEvent;
+        [SerializeField] private BoolChannel _runEvent;
+        [SerializeField] private PlayerSource _playerSource;
+
         private Character _character;
 
         private void Reset()
@@ -16,6 +20,8 @@ namespace Gameplay
 
         private void Awake()
         {
+            WarningsEventChannels();
+
             _character ??= GetComponent<Character>();
             if (_character)
             {
@@ -25,18 +31,25 @@ namespace Gameplay
 
         private void OnEnable()
         {
-            //TODO: Subscribe to inputs via event manager/event channel
-            //TODO: Set itself as player reference via ReferenceManager/DataSource
-
+            //TODO DONE: Subscribe to inputs via event manager/event channel
+            //TODO DONE: Set itself as player reference via ReferenceManager/DataSource
+            if(_playerSource != null)
+                _playerSource.DataInstance = this;
+            
             _directionEvent?.Sucription(HandleMove);
+            _runEvent?.Sucription(HandleRun);
         }
 
         private void OnDisable()
         {
-            //TODO: Unsubscribe from all inputs via event manager/event channel
-            //TODO: Remove itself as player reference via reference manager/dataSource
+            //TODO DONE: Unsubscribe from all inputs via event manager/event channel
+            //TODO DONE: Remove itself as player reference via reference manager/dataSource
+
+            if (_playerSource != null)
+                _playerSource.DataInstance = null;
 
             _directionEvent?.Unsuscribe(HandleMove);
+            _runEvent?.Unsuscribe(HandleRun);
         }
 
         public void SetPlayerAtLevelStartAndEnable(Vector3 levelStartPosition)
@@ -56,6 +69,22 @@ namespace Gameplay
                 _character.StartRunning();
             else
                 _character.StopRunning();
+        }
+
+        private void WarningsEventChannels()
+        {
+            if (!_directionEvent)
+            {
+                Debug.LogWarning($"{name}: Direction event is null.\nIf player doesnt move could be for that.");
+            }
+            if (!_runEvent)
+            {
+                Debug.LogWarning($"{name}: Direction event is null.\nIf player doesnt move could be for that.");
+            }
+            if (!_playerSource)
+            {
+                Debug.LogWarning($"{name}: Player Souce is null.");
+            }
         }
     }
 }

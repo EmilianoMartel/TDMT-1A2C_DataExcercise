@@ -1,5 +1,5 @@
 using UnityEngine;
-using Core.DataSource;
+using DataSource;
 
 namespace Scenary
 {

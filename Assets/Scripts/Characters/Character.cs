@@ -27,7 +27,7 @@ namespace Characters
 
         public void ReceiveAttack()
         {
-            //TODO: Raise event through event system telling the game to show the defeat sequence.
+            //TODO DONT: Raise event through event system telling the game to show the defeat sequence.
             Debug.Log($"{name}: received an attack!");
         }
     }

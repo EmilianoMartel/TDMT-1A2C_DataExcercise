@@ -9,6 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8efa9ace69bb72744bc3cede91588752, type: 3}
-  m_Name: GameManagerSource
+  m_Script: {fileID: 11500000, guid: 0250acdd2aff8f9498a5d0d81fa0cde1, type: 3}
+  m_Name: RunEvent
   m_EditorClassIdentifier: 
+  _config:
+    <listenerEvent>k__BackingField: 0
+    <eventLog>k__BackingField: 0

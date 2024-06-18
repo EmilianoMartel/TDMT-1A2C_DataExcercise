@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Scenary;
-using Core.DataSource;
+using DataSource;
 
 namespace GameManager
 {
@@ -13,7 +13,7 @@ namespace GameManager
         [Header("Levels")]
         [SerializeField] private List<LevelsContainer> levels;
         [Header("Data Sources")]
-        [SerializeField] private DataSource<GameManager> gameManagerDataSource;
+        [SerializeField] private GameManagerDataSource gameManagerDataSource;
         [SerializeField] private DataSource<SceneryManager> sceneryManagerDataSource;
 
 

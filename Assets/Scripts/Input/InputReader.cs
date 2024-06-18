@@ -32,18 +32,21 @@ public class InputReader : MonoBehaviour
 
     private void HandleRunInputStarted(InputAction.CallbackContext ctx)
     {
-        //TODO: Implement event logic
+        //TODO DONE: Implement event logic
         Debug.Log($"{name}: Run input started");
+        _moveEvent.InvokeEvent(ctx.ReadValue<Vector2>());
     }
 
     private void HandleRunInputCanceled(InputAction.CallbackContext ctx)
     {
-        //TODO: Implement event logic
+        //TODO DONE: Implement event logic
         Debug.Log($"{name}: Run input canceled");
+        _runEvent.InvokeEvent(false);
     }
 
     private void HandleMoveInput(InputAction.CallbackContext ctx)
     {
-        //TODO: Implement event logic
+        //TODO DONE: Implement event logic
+        _runEvent.InvokeEvent(false);
     }
 }

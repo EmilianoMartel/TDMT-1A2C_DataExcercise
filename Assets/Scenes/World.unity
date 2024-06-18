@@ -339,6 +339,7 @@ MonoBehaviour:
   speed: 2.5
   runningSpeed: 5
   _targetSource: {fileID: 11400000, guid: 97425865872ffdb408f900e29167dd8a, type: 2}
+  _dieEvent: {fileID: 11400000, guid: 55e2338b7a810db44b707c02a75b66cd, type: 2}
 --- !u!114 &2118192445
 MonoBehaviour:
   m_ObjectHideFlags: 0

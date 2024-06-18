@@ -11,6 +11,7 @@ namespace Characters
         private Vector3 _currentDirection = Vector3.zero;
         private bool _isRunning = false;
         [SerializeField] private ITargetDataSource _targetSource;
+        [SerializeField] private BoolChannel _dieEvent;
 
         private void Awake()
         {
@@ -40,8 +41,11 @@ namespace Characters
 
         public void ReceiveAttack()
         {
-            //TODO DONT: Raise event through event system telling the game to show the defeat sequence.
+            //TODO DONE: Raise event through event system telling the game to show the defeat sequence.
             Debug.Log($"{name}: received an attack!");
+            
+            if(_dieEvent)
+                _dieEvent.InvokeEvent(false);
         }
 
         private void WarningAlert()

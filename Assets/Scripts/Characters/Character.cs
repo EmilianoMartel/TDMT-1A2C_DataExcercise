@@ -1,5 +1,6 @@
 using UnityEngine;
 using Core.Interactions;
+using DataSource;
 
 namespace Characters
 {
@@ -9,6 +10,18 @@ namespace Characters
         [SerializeField] private float runningSpeed = 5;
         private Vector3 _currentDirection = Vector3.zero;
         private bool _isRunning = false;
+        [SerializeField] private ITargetDataSource _targetSource;
+
+        private void Awake()
+        {
+            WarningAlert();
+        }
+
+        private void Start()
+        {
+            if (_targetSource != null)
+                _targetSource.DataInstance = this;
+        }
 
         private void Update()
         {
@@ -29,6 +42,14 @@ namespace Characters
         {
             //TODO DONT: Raise event through event system telling the game to show the defeat sequence.
             Debug.Log($"{name}: received an attack!");
+        }
+
+        private void WarningAlert()
+        {
+            if (_targetSource == null)
+            {
+                Debug.LogWarning($"{name}: Target source is null.");
+            }
         }
     }
 }

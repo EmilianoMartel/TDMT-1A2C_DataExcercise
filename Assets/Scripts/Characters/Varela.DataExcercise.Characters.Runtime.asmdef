@@ -2,7 +2,8 @@
     "name": "Varela.DataExcercise.Characters.Runtime",
     "rootNamespace": "",
     "references": [
-        "GUID:6a581ca88f27cc8428c332a4ede4eeaf"
+        "GUID:6a581ca88f27cc8428c332a4ede4eeaf",
+        "GUID:8095bd8103cc9344aa1b4e5c9e97de9c"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

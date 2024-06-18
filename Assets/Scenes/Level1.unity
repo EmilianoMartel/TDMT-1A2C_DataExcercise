@@ -1080,6 +1080,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelStart: {fileID: 1517859829}
+  _playerSource: {fileID: 11400000, guid: 57385a66c29f4e94fb309fd1b0b4534d, type: 2}
 --- !u!4 &1420981759
 Transform:
   m_ObjectHideFlags: 0

@@ -338,6 +338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2.5
   runningSpeed: 5
+  _targetSource: {fileID: 11400000, guid: 97425865872ffdb408f900e29167dd8a, type: 2}
 --- !u!114 &2118192445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,6 +352,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _directionEvent: {fileID: 11400000, guid: b6192fcef76757b47b4d596ea534d8a5, type: 2}
+  _runEvent: {fileID: 11400000, guid: da6c85ab2c8b6094abd1eb4ae63e8ee8, type: 2}
+  _playerSource: {fileID: 11400000, guid: 57385a66c29f4e94fb309fd1b0b4534d, type: 2}
 --- !u!54 &2118192446
 Rigidbody:
   m_ObjectHideFlags: 0

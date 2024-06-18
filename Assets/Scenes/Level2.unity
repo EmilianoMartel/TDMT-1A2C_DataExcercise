@@ -269,6 +269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   runningSpeed: 2
+  _targetSource: {fileID: 0}
 --- !u!114 &1068601458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,6 +283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDistance: 3
+  _targetSource: {fileID: 11400000, guid: 97425865872ffdb408f900e29167dd8a, type: 2}
 --- !u!135 &1068601459
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1807,6 +1809,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelStart: {fileID: 1517859829}
+  _playerSource: {fileID: 11400000, guid: 57385a66c29f4e94fb309fd1b0b4534d, type: 2}
 --- !u!4 &1420981759
 Transform:
   m_ObjectHideFlags: 0

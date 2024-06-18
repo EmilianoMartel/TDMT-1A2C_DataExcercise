@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EventChannel;
 using UnityEngine.InputSystem;
 
 public class InputReader : MonoBehaviour

@@ -72,9 +72,14 @@ namespace Scenary
 
             var loadCount = newLevel.Count;
             var total = unloadCount + loadCount;
-            yield return new WaitForSeconds(2);
-            yield return Unload(currentLevel,
-                currentIndex => onLoadPercentage?.Invoke((float)currentIndex / total));
+
+            if(unloadCount == 0)
+            {
+                yield return new WaitForSeconds(2);
+                yield return Unload(currentLevel,
+                    currentIndex => onLoadPercentage?.Invoke((float)currentIndex / total));
+            }
+            
             yield return new WaitForSeconds(2);
             yield return Load(newLevel,
                 currentIndex => onLoadPercentage?.Invoke((float)(currentIndex + unloadCount) / total));

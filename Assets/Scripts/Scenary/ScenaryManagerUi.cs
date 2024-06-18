@@ -12,7 +12,7 @@ namespace Scenary
         [SerializeField] private Canvas loadingScreen;
         [SerializeField] private Image loadingBarFill;
         [SerializeField] private float fillDuration = .25f;
-
+        [SerializeField] private float _fillDeathZone = .24f;
         private SceneryManager _manager;
 
         private void OnEnable()
@@ -52,15 +52,18 @@ namespace Scenary
 
         private void TurnOffLoadingScreen()
         {
-            loadingBarFill.fillAmount = 0f;
+            loadingBarFill.fillAmount = 0.0f;
             loadingScreen.enabled = false;
         }
 
         private void UpdateLoadBarFill(float percentage)
         {
-            if (percentage == 0)
+            if(percentage < _fillDeathZone)
+            {
+                loadingBarFill.fillAmount = 0f;
                 return;
-
+            }
+            
             StartCoroutine(LerpFill(loadingBarFill.fillAmount, percentage));
         }
 

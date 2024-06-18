@@ -34,9 +34,9 @@ namespace Navigation
 
         private void HandleChangeMenu(string id)
         {
-            if (gameManagerDataSource != null && gameManagerDataSource.DataInstance != null && gameManagerDataSource.DataInstance.HandleSpecialEvents(id))
+            if (gameManagerDataSource != null && gameManagerDataSource.DataInstance != null)
             {
-                return;
+                gameManagerDataSource.DataInstance.HandleSpecialEvents(id);
             }
             for (var i = 0; i < menusWithId.Count; i++)
             {

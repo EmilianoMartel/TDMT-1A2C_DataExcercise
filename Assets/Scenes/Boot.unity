@@ -309,6 +309,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 295b3856181a19a489fa57a50075e775, type: 2}
   gameManagerDataSource: {fileID: 11400000, guid: 542ef0dc7c32c0f48a15a4e00746bcad, type: 2}
   sceneryManagerDataSource: {fileID: 11400000, guid: e05bf5b45eaf32e46beb503a55ccf946, type: 2}
+  _endLevel: {fileID: 11400000, guid: e60452897394bc24fb7e894136c59a71, type: 2}
+  _finalGame: {fileID: 11400000, guid: 55e2338b7a810db44b707c02a75b66cd, type: 2}
 --- !u!4 &581483448
 Transform:
   m_ObjectHideFlags: 0
@@ -528,6 +530,7 @@ MonoBehaviour:
   loadingScreen: {fileID: 2022073796}
   loadingBarFill: {fileID: 1872415771}
   fillDuration: 0.25
+  _fillDeathZone: 0.24
 --- !u!114 &1487745662
 MonoBehaviour:
   m_ObjectHideFlags: 0

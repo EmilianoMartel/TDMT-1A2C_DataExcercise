@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Scenary;
 using DataSource;
+using EventChannel;
 
 namespace GameManager
 {
@@ -15,14 +16,17 @@ namespace GameManager
         [Header("Data Sources")]
         [SerializeField] private GameManagerDataSource gameManagerDataSource;
         [SerializeField] private DataSource<SceneryManager> sceneryManagerDataSource;
-
-
+        [Header("Event Channels")]
+        [SerializeField] private EmptyAction _endLevel;
+        [SerializeField] private BoolChannel _finalGame;
         private int _currentLevel = 0;
 
         private void OnEnable()
         {
             if (gameManagerDataSource != null)
                 gameManagerDataSource.DataInstance = this;
+            if (_endLevel != null)
+                _endLevel.Sucription(HandleNextLevel);
         }
 
         private void OnDisable()
@@ -31,6 +35,8 @@ namespace GameManager
             {
                 gameManagerDataSource.DataInstance = null;
             }
+            if (_endLevel != null) 
+                _endLevel.Unsuscribe(HandleNextLevel);
         }
 
         public bool HandleSpecialEvents(string id)
@@ -57,6 +63,18 @@ namespace GameManager
             {
                 sceneryManagerDataSource.DataInstance.ChangeLevel(levels[_currentLevel].levels);
             }
+            _currentLevel++;
+        }
+
+        private void HandleNextLevel()
+        {
+            if (_currentLevel >= levels.Count)
+            {
+                _finalGame?.InvokeEvent(true);
+                return;
+            }
+
+            GameStart();
         }
     }
 }

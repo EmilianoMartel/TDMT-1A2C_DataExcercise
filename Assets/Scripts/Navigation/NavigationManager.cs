@@ -14,6 +14,7 @@ namespace Navigation
         [SerializeField] private List<MenuDataSource> menusWithId;
 
         [SerializeField] private GameManagerDataSource gameManagerDataSource;
+
         private int _currentMenuIndex = 0;
 
         private void Start()

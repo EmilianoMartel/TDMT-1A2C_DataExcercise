@@ -13,15 +13,21 @@ namespace Characters
         [SerializeField] private ITargetDataSource _targetSource;
         [SerializeField] private BoolChannel _dieEvent;
 
-        private void Awake()
-        {
-            WarningAlert();
-        }
-
-        private void Start()
+        private void OnEnable()
         {
             if (_targetSource != null)
                 _targetSource.DataInstance = this;
+        }
+
+        private void OnDisable()
+        {
+            if (_targetSource)
+                _targetSource.DataInstance = null;
+        }
+
+        private void Awake()
+        {
+            WarningAlert();
         }
 
         private void Update()

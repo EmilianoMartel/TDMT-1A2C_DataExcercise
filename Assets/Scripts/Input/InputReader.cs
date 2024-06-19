@@ -30,7 +30,7 @@ public class InputReader : MonoBehaviour
         }
     }
 
-    private void HandleRunInputStarted(InputAction.CallbackContext ctx)
+    private void HandleMoveInput(InputAction.CallbackContext ctx)
     {
         //TODO DONE: Implement event logic
         Debug.Log($"{name}: Run input started");
@@ -44,7 +44,7 @@ public class InputReader : MonoBehaviour
         _runEvent.InvokeEvent(false);
     }
 
-    private void HandleMoveInput(InputAction.CallbackContext ctx)
+    private void HandleRunInputStarted(InputAction.CallbackContext ctx)
     {
         //TODO DONE: Implement event logic
         _runEvent.InvokeEvent(false);

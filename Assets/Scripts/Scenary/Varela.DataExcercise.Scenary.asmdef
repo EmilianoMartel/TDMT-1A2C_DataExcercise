@@ -2,7 +2,8 @@
     "name": "Varela.DataExcercise.Scenary.Rimtime",
     "rootNamespace": "",
     "references": [
-        "GUID:8095bd8103cc9344aa1b4e5c9e97de9c"
+        "GUID:8095bd8103cc9344aa1b4e5c9e97de9c",
+        "GUID:ecc7c550ea5625740af0b061fdc78c95"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

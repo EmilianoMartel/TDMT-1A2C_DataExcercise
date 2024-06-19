@@ -43,6 +43,7 @@ namespace GameManager
         {
             if (id == playId)
             {
+                _currentLevel = 0;
                 GameStart();
                 return true;
             }

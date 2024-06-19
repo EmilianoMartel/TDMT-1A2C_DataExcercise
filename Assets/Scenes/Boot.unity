@@ -546,6 +546,7 @@ MonoBehaviour:
   _sceneryManagerDataSource: {fileID: 11400000, guid: e05bf5b45eaf32e46beb503a55ccf946, type: 2}
   _defaultLevel:
   - {fileID: 11400000, guid: 08671298bfa54ce469745c802f2cc5fc, type: 2}
+  _finalGame: {fileID: 11400000, guid: 55e2338b7a810db44b707c02a75b66cd, type: 2}
 --- !u!1 &1872415769
 GameObject:
   m_ObjectHideFlags: 0

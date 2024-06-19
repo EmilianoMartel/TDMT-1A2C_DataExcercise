@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DataSource;
+using EventChannel;
 
 namespace Scenary
 {
@@ -12,8 +13,11 @@ namespace Scenary
     {
         [SerializeField] private DataSource<SceneryManager> _sceneryManagerDataSource;
         [SerializeField] private List<ScenaryContainer> _defaultLevel;
-        private List<SceneLevel> _currentLevel;
+        [SerializeField] private BoolChannel _finalGame;
 
+        private List<SceneLevel> _currentLevel;
+        private List<SceneLevel> _firstLevel;
+        
         public event Action onLoading = delegate { };
         /// <summary>
         /// The float given is always between 0 and 1
@@ -25,6 +29,13 @@ namespace Scenary
         {
             if (_sceneryManagerDataSource != null)
                 _sceneryManagerDataSource.DataInstance = this;
+
+            _finalGame.Sucription(HandleEndGame);
+        }
+
+        private void Awake()
+        {
+            ValidateReference();
         }
 
         private void Start()
@@ -39,6 +50,8 @@ namespace Scenary
             {
                 _sceneryManagerDataSource.DataInstance = null;
             }
+
+            _finalGame.Unsuscribe(HandleEndGame);
         }
 
         public void ChangeLevel(List<SceneLevel> level)
@@ -54,8 +67,10 @@ namespace Scenary
 
         public void ChangeLevel(SceneLevel level)
         {
-            List<SceneLevel> levels = new();
-            levels.Add(level);
+            List<SceneLevel> levels = new()
+            {
+                level,
+            };
             StartCoroutine(ChangeLevel(_currentLevel, levels));
         }
 
@@ -73,7 +88,7 @@ namespace Scenary
             var loadCount = newLevel.Count;
             var total = unloadCount + loadCount;
 
-            if(unloadCount == 0)
+            if(unloadCount != 0)
             {
                 yield return new WaitForSeconds(2);
                 yield return Unload(currentLevel,
@@ -107,6 +122,23 @@ namespace Scenary
                 onLoadPercentage?.Invoke((float)current / total);
             }
             _currentLevel = level;
+            _firstLevel = level;
+            onLoaded?.Invoke();
+        }
+
+        private IEnumerator ChangeFinalLevel(List<SceneLevel> currentLevel)
+        {
+            onLoading?.Invoke();
+
+            var total = currentLevel.Count;
+
+            onLoadPercentage?.Invoke(0);
+
+            yield return new WaitForSeconds(2);
+            yield return Unload(currentLevel,
+                currentIndex => onLoadPercentage?.Invoke((float)currentIndex / total));
+
+            _currentLevel = _firstLevel;
             onLoaded?.Invoke();
         }
 
@@ -125,6 +157,7 @@ namespace Scenary
         private IEnumerator Unload(List<SceneLevel> level, Action<int> onUnloadedSceneQtyChanged)
         {
             var current = 0;
+
             foreach (var sceneName in level)
             {
                 if (!sceneName.IsUnloadable)
@@ -148,6 +181,11 @@ namespace Scenary
             return levels;
         }
 
+        private void HandleEndGame(bool win)
+        {
+            StartCoroutine(ChangeFinalLevel(_currentLevel));
+        }
+
         private void ValidateReference()
         {
             if (!_sceneryManagerDataSource)
@@ -159,6 +197,12 @@ namespace Scenary
             if (_defaultLevel == null)
             {
                 Debug.LogError($"{name}: Default Level is null.\nCheck and assigned one.\nDisabling component.");
+                enabled = false;
+                return;
+            }
+            if (_finalGame == null)
+            {
+                Debug.LogError($"{name}: FinalGame is null.\nCheck and assigned one.\nDisabling component.");
                 enabled = false;
                 return;
             }

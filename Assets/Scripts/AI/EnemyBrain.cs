@@ -30,7 +30,7 @@ namespace AI
         private void Update()
         {
             //TODO DONE: Add logic to get the target from a source/reference system
-            if (_target == null)
+            if (_targetSource.DataInstance == null)
                 return;
             //          AB        =         B        -          A
             var directionToTarget = _target.transform.position - transform.position;

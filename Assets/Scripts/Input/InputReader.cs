@@ -47,6 +47,6 @@ public class InputReader : MonoBehaviour
     private void HandleRunInputStarted(InputAction.CallbackContext ctx)
     {
         //TODO DONE: Implement event logic
-        _runEvent.InvokeEvent(false);
+        _runEvent.InvokeEvent(true);
     }
 }

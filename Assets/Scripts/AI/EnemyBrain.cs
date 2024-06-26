@@ -9,7 +9,6 @@ namespace AI
     {
         [SerializeField] private float attackDistance;
         [SerializeField] private ITargetDataSource _targetSource;
-        private ITarget _target;
         private ISteerable _steerable;
 
         private void Awake()
@@ -33,11 +32,11 @@ namespace AI
             if (_targetSource.DataInstance == null)
                 return;
             //          AB        =         B        -          A
-            var directionToTarget = _target.transform.position - transform.position;
+            var directionToTarget = _targetSource.DataInstance.transform.position - transform.position;
             var distanceToTarget = directionToTarget.magnitude;
             if (distanceToTarget < attackDistance)
             {
-                _target.ReceiveAttack();
+                _targetSource.DataInstance.ReceiveAttack();
             }
             else
             {
@@ -52,8 +51,6 @@ namespace AI
             {
                 yield return null;
             }
-
-            _target = _targetSource.DataInstance;
         }
 
         private void OnDrawGizmosSelected()

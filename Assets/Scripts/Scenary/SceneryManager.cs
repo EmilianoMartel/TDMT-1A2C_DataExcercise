@@ -163,8 +163,9 @@ namespace Scenary
                 if (!sceneName.IsUnloadable)
                     continue;
 
-                var loadOp = SceneManager.UnloadSceneAsync(sceneName.SceneName);
-                yield return new WaitUntil(() => loadOp.isDone);
+                if(TryUnloadScene(sceneName.SceneName, out var loadOp))
+                    yield return new WaitUntil(() => loadOp.isDone);
+
                 current++;
                 onUnloadedSceneQtyChanged(current);
             }
@@ -184,6 +185,17 @@ namespace Scenary
         private void HandleEndGame(bool win)
         {
             StartCoroutine(ChangeFinalLevel(_currentLevel));
+        }
+
+        private bool TryUnloadScene(string sceneName, out AsyncOperation loadOp)
+        {
+            if (SceneManager.GetSceneByName(sceneName).IsValid())
+            {
+                loadOp = SceneManager.UnloadSceneAsync(sceneName);
+                return true;
+            }
+            loadOp = null;
+            return false;
         }
 
         private void ValidateReference()
